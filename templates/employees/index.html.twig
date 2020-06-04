@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Employees!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Employees! ✅</h1>
+    <a class="btn btn-warning mb-4 mt-3" href="/create">Insert new employee</a>
+    <a class="btn btn-warning mb-4 mt-3" href="/departments">Departments</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Birth Date</th>
+            <th scope="col"> Hire Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for employees in employees %}
+        <tr>
+
+            <th scope="row">{{ employees.id }}</th>
+            <td>{{ employees.firstname }}</td>
+            <td>{{ employees.lastname }}</td>
+            <td>{{employees.gender}}</td>
+            <td>{{ employees.birthdate|date("m/d/Y") }}</td>
+            <td>{{employees.hiredate|date("m/d/Y")}}</td>
+            <td><a class="btn btn-info" href="{{ path('editEmp', {'id': employees.id}) }}">Update</a> </td>
+            <td><a class="btn btn-danger" data-id="{{ employees.id }}" href="{{ path('deleteEmp', {'id': employees.id}) }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}
